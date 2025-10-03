@@ -1,0 +1,16 @@
+﻿# dependencies
+node_modules/
+.pnpm-store/
+yarn.lock
+pnpm-lock.yaml
+
+# build
+dist/
+
+# local tooling
+.vscode/
+.DS_Store
+
+# env (NO subir credenciales)
+.env
+.env.*.local

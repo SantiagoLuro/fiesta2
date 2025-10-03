@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Great+Vibes&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color para la boda minimalista */
+:root {
+  --ink: #0f172a;
+  --paper: #f7f7f5;
+  --muted: #a8b0b6;
+  --sage: #9aa69e;
+  --gold: #bfa977;
+  --scroll: 0;
+  --scroll-y: 0;
+  --parallax-range: 16vh;
+  --reveal-start: 0.8;
+  --reveal-slope: 5;
+}
+
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--paper);
+  background: #000;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Degradé superior minimalista para el fondo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(160deg, #0b0b0b 10%, #111827 55%, #1f2937 100%);
+  background-size: 100% 300%;
+  background-position-y: calc(var(--scroll-y) * 1%);
+  transition: background-position-y 0.3s ease-out, opacity 0.2s linear;
+  opacity: clamp(0.18, calc(0.9 - (max(0, (var(--scroll) - var(--reveal-start))) * var(--reveal-slope))), 0.9);
+}
+
+/* Parallax de imagen de fondo */
+.bg-parallax {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+}
+.bg-parallax__img {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center bottom;
+  transform: translate3d(0, calc(var(--scroll) * -1 * var(--parallax-range)), 0);
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+.bg-parallax::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(to top, #ffffff 0%, #ffffff 65%, rgba(255, 255, 255, 0) 97%);
+  mask-image: linear-gradient(to top, #ffffff 0%, #ffffff 65%, rgba(255, 255, 255, 0) 97%);
+  background: linear-gradient(180deg, rgba(154,166,158,0.25) 0%, rgba(154,166,158,0.18) 45%, rgba(154,166,158,0.12) 100%);
+  opacity: clamp(0, calc((var(--scroll) - var(--reveal-start)) * var(--reveal-slope)), 1);
+  pointer-events: none;
+}
+
+/* Utilidades de tipografía */
+.playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.dancing-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+/* Gradiente para texto */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff, var(--gold), #e8e8e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Efecto de vidrio y sombras para contenedores */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.btn-glow {
+  box-shadow: 0 0 16px rgba(154, 166, 158, 0.35);
+  transition: all 0.3s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 22px rgba(154, 166, 158, 0.55);
+  transform: translateY(-2px);
+}
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), #ffffff, var(--gold), transparent);
+  margin: 4rem 0;
+}
+
+/* Inputs y textareas */
+input, textarea {
+  color: #111 !important;
+  background: #ffffff;
+  caret-color: #334155;
+}
